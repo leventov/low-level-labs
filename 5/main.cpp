@@ -1,18 +1,10 @@
 #include "BigInt.h"
 #include <stdio.h>
-#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
 
-void main1()
-{
-	unsigned int a = 10, b = 11;
-	a -= b;
-	freopen("1.out","w",stdout);
-	for (int i = 0; i < 32; i++) printf("%d", (int)(a>>i)&1);
-	printf("\n");
-}
-
-int main() {
-	//freopen("1.out","w",stdout);
+int main1() {
 	BigInt *a = new BigInt(1);
 	BigInt *b = new BigInt(1);
 	BigInt * t;
@@ -35,7 +27,7 @@ int main() {
 	return 0;
 }
 
-int main3() {
+int main2() {
 	BigInt a = BigInt(8);
 	BigInt b = BigInt(5);
 	printf("%s %s\n", a.hex(), b.hex());
@@ -55,3 +47,30 @@ int main3() {
 	printf("%s %s %s\n", a.hex(), b.hex(), c.hex());
 	return 0;
 }
+
+int main() {
+    //struct timespec t1, t2;
+    int is = sizeof(int);
+    // s0 - number of int words int bigint sources, s - int realisation-specific words
+    int s0 = 100, s = s0 * is / BigInt::WS; 
+    printf("%d\n", s);
+    int* words = (int*)calloc(2*s0, is);
+    for (int* t = words; t < words + 2*s0; t++) *t = rand();
+    BigInt *a = new BigInt(s, (void*)words);
+    BigInt *b = new BigInt(s, (void*)(words+s0));
+    BigInt *t = new BigInt(*a);
+    for (int j = 0; j < 10; j++) {
+		*a = *t;
+		//clock_gettime(CLOCK_MONOTONIC, &t1);
+		
+		*a += *b;
+		
+		//clock_gettime(CLOCK_MONOTONIC, &t2);
+		// print cpu clock ticks per one bigint plus/minus operation
+		// 32/10 - my cpu is 3.2 GHz
+		//printf("%ld\n", (t2.tv_nsec - t1.tv_nsec)*32/10);
+	}
+	printf("%s\n", a->hex());
+    return 0;
+}
+

@@ -1,9 +1,14 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include "BigInt.h"
 
 #define uChar unsigned char
+
+BigInt::BigInt(int init_size, void* _words)	
+{
+	wc = init_size;
+	words = _words;
+}
 
 BigInt::BigInt(const BigInt &s)
 {
@@ -23,6 +28,10 @@ BigInt & BigInt::operator=(const BigInt &s)
 	words = malloc(size);
 	memcpy(words, s.words, size);
 }
+
+BigInt BigInt::ONE = BigInt(1, 1);
+BigInt BigInt::ZERO = BigInt(1, 0);
+
 
 const char *digits = "0123456789ABCDEF";
 char* BigInt::hex()
@@ -50,19 +59,17 @@ BigInt::~BigInt(void)
 
 void BigInt::alloc(int nwc)
 {
-        void *nwords = calloc(nwc, WS);
-        memcpy(nwords, words, wc*WS);
-        free(words);
-        wc = nwc;
-        words = nwords;
+	void *nwords = calloc(nwc, WS);
+	memcpy(nwords, words, wc*WS);
+	free(words);
+	wc = nwc;
+	words = nwords;
 }
 
 void BigInt::grow(int cwc)
 {
-        if (cwc > wc) this->alloc(cwc);
+	if (cwc > wc) this->alloc(cwc);
 }
-
-/* */
 
 
 BigInt & BigInt::operator+(const BigInt &other)

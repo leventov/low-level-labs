@@ -4,6 +4,8 @@ class BigInt
 {
 public:
 	BigInt(int);
+	BigInt(int, int);
+	BigInt(int, void*);
 	~BigInt(void);
 	BigInt(const BigInt &s);
 	BigInt &operator=(const BigInt &s);
@@ -15,13 +17,14 @@ public:
 
 	static BigInt ONE;
 	static BigInt ZERO;
-private:
-	void* words;
-	int wc;
 
 	static int WS; //word size
 	
-	BigInt(int, int);
+	void* words;
+private:
+	
+	int wc;
+
 	void grow(int owc);
 	void alloc(int nwc);
 };

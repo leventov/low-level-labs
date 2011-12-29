@@ -4,7 +4,7 @@ CXXFLAGS =
 BIR = ABigInt
 
 main: main.o BI_c.o $(BIR).o
-	$(CXX) $(CXXFLAGS) -o main BI_c.o $(BIR).o main.cpp
+	$(CXX) $(CXXFLAGS) -o main BI_c.o $(BIR).o main.cpp -lrt
 
 $(BIR).o: $(BIR).cpp BigInt.h
 	$(CXX) $(CXXFLAGS) -c $(BIR).cpp
