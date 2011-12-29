@@ -49,7 +49,7 @@ int main2() {
 }
 
 int main() {
-    //struct timespec t1, t2;
+    struct timespec t1, t2;
     int is = sizeof(int);
     // s0 - number of int words int bigint sources, s - int realisation-specific words
     int s0 = 100, s = s0 * is / BigInt::WS; 
@@ -61,16 +61,16 @@ int main() {
     BigInt *t = new BigInt(*a);
     for (int j = 0; j < 10; j++) {
 		*a = *t;
-		//clock_gettime(CLOCK_MONOTONIC, &t1);
+		clock_gettime(CLOCK_MONOTONIC, &t1);
 		
 		*a += *b;
 		
-		//clock_gettime(CLOCK_MONOTONIC, &t2);
+		clock_gettime(CLOCK_MONOTONIC, &t2);
 		// print cpu clock ticks per one bigint plus/minus operation
 		// 32/10 - my cpu is 3.2 GHz
-		//printf("%ld\n", (t2.tv_nsec - t1.tv_nsec)*32/10);
+		printf("%ld\n", (t2.tv_nsec - t1.tv_nsec)*32/10);
 	}
-	printf("%s\n", a->hex());
+	//printf("%s\n", a->hex());
     return 0;
 }
 

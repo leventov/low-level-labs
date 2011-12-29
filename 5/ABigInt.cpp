@@ -71,8 +71,7 @@ BigInt & BigInt::operator+=(const BigInt &rhs)
 			: nocarry
 	);
 	//*/
-	    struct timespec t1, t2;
-	    clock_gettime(CLOCK_MONOTONIC, &t1);
+
 	//*				rev 2.0
 	asm goto (
 			"clc\n"
@@ -117,13 +116,8 @@ BigInt & BigInt::operator+=(const BigInt &rhs)
 	owc = wc;
 	this->alloc(owc + 1);
 	*((uInt*)words + owc) = (uInt)1;
-	
-	nocarry:	clock_gettime(CLOCK_MONOTONIC, &t2);
-		// print cpu clock ticks per one bigint plus/minus operation
-		// 32/10 - my cpu is 3.2 GHz
-		printf("%ld\n", (t2.tv_nsec - t1.tv_nsec)*32/10);
 
-	 return *this;
+	nocarry:	return *this;
 }
 
 BigInt & BigInt::operator-=(const BigInt &rhs)
