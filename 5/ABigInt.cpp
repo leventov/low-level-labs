@@ -1,7 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <unistd.h>
 #include "BigInt.h"
 
 #define uInt unsigned long long int
@@ -72,7 +69,7 @@ BigInt & BigInt::operator+=(const BigInt &rhs)
 	);
 	//*/
 
-	//*				rev 2.0
+	/*				rev 2.0
 	asm goto (
 			"clc\n"
 			"l1:\t"
@@ -89,13 +86,9 @@ BigInt & BigInt::operator+=(const BigInt &rhs)
 			:
 			: nocarry
 	);
-	
-	
-
-	
 	//*/
 
-	/*				rev 2.1
+	//*				rev 2.1
 	asm goto (
 			"clc\n"
 			"l1:\t"
@@ -159,7 +152,7 @@ BigInt & BigInt::operator-=(const BigInt &rhs)
 	);
 	//*/
 	
-	//*				rev 2.0
+	/*				rev 2.0
 	asm (
 			"clc\n"
 			"l2:\t"
@@ -175,7 +168,7 @@ BigInt & BigInt::operator-=(const BigInt &rhs)
 	);
 	//*/
 
-	/*				rev 2.1
+	//*				rev 2.1
 	asm (
 			"clc\n"
 			"l2:\t"
@@ -186,7 +179,7 @@ BigInt & BigInt::operator-=(const BigInt &rhs)
 			"jnz\tl2\n\t"
 			:
 			: [th] "r" (th), [oz] "r" (oz),
-			  [ax] "a" (FZ), [cx] "c" (wc), [off] "b" (FZ)
+			  [ax] "a" (FZ), [cx] "c" (wc), [off] "b" ((long long int)0)
 	);
 	//*/
 	

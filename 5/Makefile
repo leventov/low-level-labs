@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = 
+CXXFLAGS = -O2
 
 BIR = ABigInt
 
@@ -13,7 +13,7 @@ BI_c.o: BigInt_common.cpp BigInt.h
 	$(CXX) $(CXXFLAGS) -c -o BI_c.o BigInt_common.cpp
 
 
-$(BIR).s: $(BIR).cpp BigInt.h
-	$(CXX) $(CXXFLAGS) -S $(BIR).cpp
+A.s: $(BIR).cpp BigInt.h
+	$(CXX) $(CXXFLAGS) -o A.s -S $(BIR).cpp
 
 
