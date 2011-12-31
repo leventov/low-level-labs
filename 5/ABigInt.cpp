@@ -75,8 +75,8 @@ BigInt & BigInt::operator+=(const BigInt &rhs)
 			"l1:\t"
 			"mov\t(%[oz]), %[ax]\n\t"
 			"adc\t%[ax], (%[th])\n\t"
-			"lea\t8(%[th]), %[th]\n\t"
-			"lea\t8(%[oz]), %[oz]\n\t"
+			"lea\t4(%[th]), %[th]\n\t"
+			"lea\t4(%[oz]), %[oz]\n\t"
 			"dec\t%[cx]\n\t"
 			"jnz\tl1\n\t"
 			"jnc\t%l[nocarry]\n"
@@ -158,8 +158,8 @@ BigInt & BigInt::operator-=(const BigInt &rhs)
 			"l2:\t"
 			"mov\t(%[oz]), %[ax]\n\t"
 			"sbb\t%[ax], (%[th])\n\t"
-			"lea\t8(%[th]), %[th]\n\t"
-			"lea\t8(%[oz]), %[oz]\n\t"
+			"lea\t4(%[th]), %[th]\n\t"
+			"lea\t4(%[oz]), %[oz]\n\t"
 			"dec\t%[cx]\n\t"
 			"jnz\tl2\n\t"
 			:
@@ -180,6 +180,7 @@ BigInt & BigInt::operator-=(const BigInt &rhs)
 			:
 			: [th] "r" (th), [oz] "r" (oz),
 			  [ax] "a" (FZ), [cx] "c" (wc), [off] "b" ((long long int)0)
+			: 
 	);
 	//*/
 	
